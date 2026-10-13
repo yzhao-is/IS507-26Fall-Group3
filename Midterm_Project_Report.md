@@ -348,7 +348,7 @@ Individual notebooks may focus on different sample sizes or analytical tasks, bu
 
 ---
 
-## 15. Current Status
+## 15. Current Status & Future Work
 
 At the midterm stage, we have:
 
@@ -362,3 +362,7 @@ At the midterm stage, we have:
 - developed an MLE-based estimation plan
 
 The next step is to complete the repeated-sampling analysis and compare the fitted Normal models across sample sizes.
+
+## 16. AI Disclosure
+
+We used Claude and ChatGPT to support brainstorming during dataset selection. We also used ChatGPT to assist with Python coding and to help draft and revise parts of the report. All AI-assisted code, analyses, and written content were reviewed, tested, and discussed by the team, and all team members are expected to understand the methods and results presented in this project. 
