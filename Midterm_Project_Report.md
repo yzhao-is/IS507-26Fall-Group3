@@ -18,7 +18,7 @@
 
 ## 1. Motivation
 
-Museum collection databases contain large amounts of structured metadata, including information about artists, creation dates, media, dimensions, acquisition dates, departments, and cataloging status. These records support collection management, research, and public access, but museum metadata can also contain missing, inconsistent, or difficult-to-standardize information.
+Museum collection databases contain large amounts of structured metadata, including information about artists, creation dates, media, dimensions, acquisition dates, departments, and cataloging status. These records support collection management, research, and public access, but museum metadata usually also contain missing, inconsistent, or difficult-to-standardize information.
 
 Our original project question was:
 
@@ -62,25 +62,29 @@ We use the current open-access MoMA collection dataset published by the Museum o
 
 The primary file used in our analysis is:
 
-`Artworks.csv`
+`Artworks.csv` (Sept. 22, 2026 version)
 
-The dataset contains **160,700 artwork records** and includes variables such as:
+The dataset contains **160,700 artwork records** and includes 30 variables such as:
 
 - Title
 - Artist
-- Artist nationality
+- ConstituentID
+- ArtistBio
+- Nationality
+- BeginDate
+- EndDate
 - Gender
-- Artwork date
+- Date (of the artwork)
 - Medium
 - Dimensions
-- Classification
+- OnView
 - Department
 - Acquisition date
 - Cataloged status
 - Object ID
 - URL and image information
 
-Each row represents an artwork record.
+Each row represents an artwork record. No duplicated entry.
 
 ---
 
@@ -88,24 +92,48 @@ Each row represents an artwork record.
 
 We first examined overall metadata completeness.
 
-We constructed a metadata completeness score based on whether selected core fields were present for each artwork record.
-
 The initial results were:
 
-```text
-count    160700.000000
-mean          0.982345
-std           0.050796
-min           0.400000
-25%           1.000000
-50%           1.000000
-75%           1.000000
-max           1.000000
+```Missing_Count	Missing_Percent
+Seat Height (cm)	160700	100.000000
+Circumference (cm)	160690	99.993777
+Weight (kg)	160398	99.812072
+Length (cm)	159962	99.540759
+OnView	159442	99.217175
+Diameter (cm)	159300	99.128811
+Duration (sec.)	158710	98.761668
+Depth (cm)	141962	88.339764
+ImageURL	65122	40.523958
+URL	56587	35.212819
+Width (cm)	31339	19.501556
+Height (cm)	30492	18.974487
+Medium	8717	5.424393
+Dimensions	8325	5.180460
+ArtistBio	6684	4.159303
+DateAcquired	5462	3.398880
+Date	2016	1.254512
+CreditLine	1283	0.798382
+Artist	1258	0.782825
+ConstituentID	1258	0.782825
+BeginDate	1258	0.782825
+EndDate	1258	0.782825
+Nationality	1258	0.782825
+Gender	1258	0.782825
+Title	48	0.029869
+Classification	1	0.000622
+AccessionNumber	0	0.000000
+Cataloged	0	0.000000
+ObjectID	0	0.000000
+Department	0	0.000000
 ```
 
-The average metadata completeness is approximately **98.2%**, while the median and both the 25th and 75th percentiles are 100%.
+The "Cataloged" field is a binary with only "Y" and "N", the results are as follows:
 
-This suggests that simple missing fields status alone is unlikely to provide enough variation for the original catalog-review question.
+```Cataloged	
+Y	104113
+N	56587```
+
+The date of artworks should be all before 2026, we identified one with a number "3000", manually checked it, and determined it to be a testing entry and should be removed. (It should a picture of chopsticks with date 3000 B.C.E.)
 
 ---
 
@@ -183,17 +211,13 @@ Using repeated sampling, we examine whether larger samples produce more stable e
 
 According to the Law of Large Numbers, we expect:
 
-\[
-\bar{X} \rightarrow \mu
-\]
+X̄ → μ
 
 as sample size increases.
 
 We therefore compare the absolute error:
 
-\[
-|\bar{X} - \mu|
-\]
+|X̄ − μ|
 
 for different sample sizes.
 
@@ -203,9 +227,7 @@ According to the Central Limit Theorem, the distribution of sample means should 
 
 The standard error is expected to decrease approximately according to:
 
-\[
-SE(\bar{X}) = \frac{\sigma}{\sqrt{n}}
-\]
+SE(X̄) = σ / √n
 
 ---
 
@@ -215,24 +237,15 @@ We also use Maximum Likelihood Estimation to estimate parameters of the creation
 
 As a baseline probability model, we initially assume that creation years follow a Normal distribution:
 
-\[
-X_i \sim N(\mu,\sigma^2)
-\]
+Xᵢ ~ N(μ, σ²)
 
 For a Normal model, the maximum likelihood estimate of the mean is:
 
-\[
-\hat{\mu}_{MLE} = \bar{X}
-\]
+μ̂_MLE = X̄
 
 and the maximum likelihood estimate of the variance is:
 
-\[
-\hat{\sigma}^2_{MLE}
-=
-\frac{1}{n}
-\sum_{i=1}^{n}(X_i-\bar{X})^2
-\]
+σ̂²_MLE = (1/n) · Σᵢ₌₁ⁿ(Xᵢ − X̄)²
 
 We estimate these parameters separately for samples of different sizes and compare their stability.
 
@@ -359,32 +372,8 @@ For the final project, we expect to extend the analysis using additional metadat
 
 ## 13. Repository Structure
 
-```text
-.
-├── README.md
-│
-├── notebooks/
-│   ├── data_cleaning/
-│   ├── sampling/
-│   ├── modeling/
-│   └── final_analysis/
-│
-├── figures/
-│   ├── midterm/
-│   └── final/
-│
-├── data/
-│   └── README.md
-│
-└── docs/
-```
-
-### Notebook organization
-
 - `data_cleaning/` contains different iterations of the data-cleaning process.
-- `sampling/` contains sampling and repeated-sampling experiments.
-- `modeling/` contains MLE and probability-model fitting.
-- `final_analysis/` will contain integrated analyses for the final project.
+- `data_analysis/` contains sampling and repeated-sampling experiments, MLE and probability-model fitting.
 
 ---
 
@@ -399,7 +388,7 @@ All team members participate in:
 - report preparation
 - presentation preparation
 
-Individual notebooks may focus on different sample sizes or analytical tasks, but results are reviewed and compared jointly by the team.
+Individual notebooks focus on different sample sizes or analytical tasks, but results are reviewed and compared jointly by the team.
 
 ---
 
@@ -418,6 +407,13 @@ At the midterm stage, we have:
 
 The next step is to complete the repeated-sampling analysis and compare the fitted Normal models across sample sizes.
 
-## 16. AI Disclosure
+## 16. Related Work
+
+Bylund, C., & Näslund, A. (2026). Beyond numbers: visual and textual diversity in the online art database. Museum Management and Curatorship, 41(2), 318–338. https://doi.org/10.1080/09647775.2024.2375994
+
+Zhitomirsky-Geffet M, Kizhner I, Minster S (2023), "What do they make us see: a comparative study of cultural bias in online databases of two large museums". Journal of Documentation, Vol. 79 No. 2 pp. 320–340, doi: https://doi.org/10.1108/JD-02-2022-0047 
+
+
+## 17. AI Disclosure
 
 We used Claude and ChatGPT to support brainstorming during dataset selection. We also used ChatGPT to assist with Python coding and to help draft and revise parts of the report. All AI-assisted code, analyses, and written content were reviewed, tested, and discussed by the team, and all team members are expected to understand the methods and results presented in this project. 
