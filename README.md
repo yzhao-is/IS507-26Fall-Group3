@@ -3,4 +3,4 @@
 - [Midterm Report & Presentation](Midterm_Project_Report.md)
 - [MoMA Collection Dataset](https://github.com/MuseumofModernArt/collection)
 
-This repository contains our code and analysis for the MoMA collection project.
+This repository contains our code and analysis for the MoMA collection based on their Sep 22, 2026 release.
