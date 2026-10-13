@@ -238,6 +238,61 @@ We estimate these parameters separately for samples of different sizes and compa
 
 ---
 
+## 10. MAP Estimation and Sensitivity Analysis
+
+In addition to Maximum Likelihood Estimation (MLE), we use **Maximum A Posteriori (MAP) estimation** to examine how prior assumptions influence the estimated mean creation year of artworks.
+
+While MLE estimates the parameters using only the observed data, MAP combines sample information with a prior distribution.
+
+The purpose of MAP in this project is **not to determine whether artwork creation years follow a Normal distribution**, but to evaluate the sensitivity and stability of parameter estimates.
+
+### Prior Selection
+
+We assume a **Normal prior distribution** for the mean creation year (μ).
+
+To examine the influence of prior strength, we compare two hypothetical priors:
+
+- **Weak Prior:** Normal distribution with mean = 1950 and standard deviation = 20
+- **Strong Prior:** Normal distribution with mean = 1950 and standard deviation = 3
+
+Both priors have the same mean but different levels of uncertainty. These priors are experimental assumptions rather than independently verified historical information.
+
+We combine each prior with an approximately Normal likelihood for the sample mean, using the sample variance to estimate sampling uncertainty.
+
+### MLE vs. MAP Comparison
+
+We compare MLE and MAP across three sample sizes:
+
+- n = 100
+- n = 1,000
+- n = 3,000
+
+For each sample size, we repeat random sampling 500 times.
+
+For each sample, we compare:
+
+- MLE and MAP estimates of the mean creation year
+- Mean Absolute Error (MAE) relative to the full cleaned dataset mean
+- Average absolute difference between MAP and MLE
+- The influence of weak and strong priors across sample sizes
+
+This comparison allows us to examine whether increasing the sample size reduces the influence of prior assumptions.
+
+### Interpretation
+
+This analysis helps us distinguish between two separate questions:
+
+1. How sensitive are the estimated parameters to prior assumptions?
+2. Does increasing the sample size make MAP estimates converge toward MLE estimates?
+
+As sample size increases, we expect the observed data to have greater influence on MAP estimates, reducing the effect of the prior.
+
+However, **agreement between MAP and MLE does not necessarily imply that the Normal distribution adequately represents the observed creation years**.
+
+Therefore, MAP serves as a **supplementary sensitivity analysis**, while the evaluation of Normal model fit relies primarily on the observed distribution, fitted Normal curve, and Q–Q plot.
+
+--
+
 ## 10. Baseline Model
 
 Our baseline model is a **single Normal distribution** fitted to artwork creation years.
