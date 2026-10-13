@@ -10,7 +10,7 @@
 
 ### Project Links
 
-- **Data source:** [MoMA Collection Dataset](https://github.com/MuseumofModernArt/collection)
+- **Data source:** [MoMA Collection Dataset](https://github.com/MuseumofModernArt/collection) (Based on the Sept. 22, 2026 update)
 - **Presentation:** [Google Slides](https://docs.google.com/presentation/d/1bQAFA9kRCh8y8M3GlJiRZnAVYaBDGwUgR_FPOiNd2iY/edit?usp=sharing)
 - **Project repository:** this repository
 
