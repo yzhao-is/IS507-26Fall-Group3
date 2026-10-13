@@ -131,7 +131,8 @@ The "Cataloged" field is a binary with only "Y" and "N", the results are as foll
 
 ```Cataloged	
 Y	104113
-N	56587```
+N	56587
+```
 
 The date of artworks should be all before 2026, we identified one with a number "3000", manually checked it, and determined it to be a testing entry and should be removed. (It should a picture of chopsticks with date 3000 B.C.E.)
 
