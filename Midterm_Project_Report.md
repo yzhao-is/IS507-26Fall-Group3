@@ -26,13 +26,21 @@ Our original project question was:
 
 This question was initially based on an older MoMA dataset available through [Kaggle](https://www.kaggle.com/datasets/momanyc/museum-collection), which contained information related to curator approval and cataloging status.
 
-However, after switching to the current dataset published by the Museum of Modern Art, we found that the structure of the data had changed substantially. The current dataset does not contain an explicit variable indicating whether a record has been rejected or requires curator review.
+However, after switching to the current dataset published by the Museum of Modern Art, we found that the structure of the data had changed. The current dataset does not contain an explicit variable indicating whether a record has been rejected or requires curator review, and based on the disclaimer: "Much of the information included in this dataset is not complete and has not been curatorially approved".
 
-We therefore revised the scope of the midterm project to focus on the statistical properties of one important metadata field: **artwork creation year**.
+We therefore adjusted our approach. Rather than directly predicting which records need review, we first investigate whether statistical models can reliably describe museum metadata and what limitations these models may have.
+
+For the midterm, we focus on **artwork creation year** as a case study. It is a numerical variable suitable for probability modeling, but its original metadata includes uncertain dates, ranges, and inconsistent formats.
+
+Our midterm serves as a methodological pilot. We examine how sampling affects estimation, establish a simple probabilistic baseline using Maximum Likelihood Estimation (MLE), and explore how prior assumptions influence estimation through Maximum A Posteriori (MAP).
+
+We also conduct an initial comparison of creation years by cataloging status to explore how temporal patterns may relate to our broader research interest.
+
+This allows us to evaluate the usefulness and limitations of simple statistical methods before extending the analysis to additional metadata and more substantive cataloging questions.
 
 ---
 
-## 2. Current Research Questions
+## 2. Research Questions
 
 For the midterm, we focus on the following questions:
 
@@ -49,6 +57,8 @@ For the midterm, we focus on the following questions:
 > **Does a Normal distribution adequately describe the creation years of artworks in MoMA's collection?**
 
 These questions allow us to examine the behavior of real museum metadata using probability and statistical methods introduced in the course, including random sampling, the Law of Large Numbers, the Central Limit Theorem, and Maximum Likelihood Estimation.
+
+We use a Normal distribution as our baseline model, estimate its parameters using MLE, and examine the influence of prior assumptions through MAP estimation.
 
 This midterm analysis also provides a foundation for the broader final project, where we plan to investigate whether statistical characteristics of metadata can support more targeted analysis of cataloging patterns.
 
@@ -135,6 +145,7 @@ N	56587
 ```
 
 The date of artworks should be all before 2026, we identified one with a number "3000", manually checked it, and determined it to be a testing entry and should be removed. (It should a picture of chopsticks with date 3000 B.C.E.)
+
 
 ---
 
